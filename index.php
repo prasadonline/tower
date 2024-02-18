@@ -48,7 +48,11 @@ get_header();
 
             </div>
 
-
+            <div class="clearfix"></div>
+            <h2>Insurance Policy Claim</h2>
+            <?php
+            get_template_part( 'archive', 'loop' );
+            ?>
         </div>
     </div>
 
