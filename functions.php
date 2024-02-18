@@ -306,3 +306,65 @@ add_action( 'save_post_insurance_claim', 'insurance_claim_save_meta_box_data', 1
 
 
 // End of Insurance Policy Claim Custom meta
+
+
+/**
+ * Register meta fields for API calls
+ */
+add_action( 'rest_api_init', 'register_meta_fields');
+function register_meta_fields(){
+
+    // Insurance Policy
+
+    register_meta('post', '_insurance_policy_id', array(
+        'type' => 'string',
+        'description' => 'Insurance Policy ID',
+        'single' => true,
+        'show_in_rest' => true
+    ));
+
+    register_meta('post', '_insurance_policy_name', array(
+        'type' => 'string',
+        'description' => 'Insurance Policy Name',
+        'single' => true,
+        'show_in_rest' => true
+    ));
+
+    register_meta('post', '_insurance_policy_live_date', array(
+        'type' => 'string',
+        'description' => 'Insurance Policy Live Date',
+        'single' => true,
+        'show_in_rest' => true
+    ));
+
+    register_meta('post', '_insurance_policy_description', array(
+        'type' => 'string',
+        'description' => 'Insurance Policy Description',
+        'single' => true,
+        'show_in_rest' => true
+    ));
+
+    // Insurance Policy Claim
+
+    register_meta('post', '_insurance_claim_id', array(
+        'type' => 'string',
+        'description' => 'Insurance Policy Claim ID',
+        'single' => true,
+        'show_in_rest' => false
+    ));
+
+    register_meta('post', '_insurance_claim_name', array(
+        'type' => 'string',
+        'description' => 'Insurance Policy CLaim Name',
+        'single' => true,
+        'show_in_rest' => false
+    ));
+
+    register_meta('post', '_insurance_claim_email', array(
+        'type' => 'string',
+        'description' => 'Insurance Policy Claim Email',
+        'single' => true,
+        'show_in_rest' => false
+    ));
+}
+
