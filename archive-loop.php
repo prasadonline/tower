@@ -3,25 +3,40 @@
  * The template for displaying the archive loop.
  */
 
-
-if ( have_posts() ) :
     ?>
     <div class="row">
         <?php
-        while ( have_posts() ) :
-            the_post();
 
-            /**
-             * Include the Post-Format-specific template for the content.
-             * If you want to overload this in a child theme then include a file
-             * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-             */
-            get_template_part( 'content', 'index' ); // Post format: content-index.php
-        endwhile;
+        $args = array(
+            'post_type' => 'insurance_claim',
+            'posts_per_page' => -1,
+            'order' => 'ASC'
+        );
+        $the_query = new WP_Query($args);
         ?>
+        <?php if ( $the_query->have_posts() ) : ?>
+            <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+                <article id="post-<?php the_ID(); ?>" <?php post_class( 'col-sm-6' ); ?>>
+                    <div class="card mb-4">
+                        <header class="card-body">
+                            <h2 class="card-title">
+                                <a href="#" ><?php echo get_post_meta(get_the_ID(), "_insurance_claim_id", true) ?></a>
+                            </h2>
+                        </header>
+                        <div class="card-body">
+                            <div class="card-text entry-content">
+                                <span><?php echo get_post_meta(get_the_ID(), "_insurance_claim_name", true) ?></span><br>
+                                <span><?php echo get_post_meta(get_the_ID(), "_insurance_claim_email", true) ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            <?php endwhile; ?>
+            <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
+
     </div>
 <?php
-endif;
 
 wp_reset_postdata();
 
